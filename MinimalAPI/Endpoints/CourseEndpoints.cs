@@ -20,9 +20,9 @@ public static class CourseEndpoints
             Results.Ok(repository.Read()))
             .WithOpenApi();
 
-        endpoints.MapGet("ENDPOINT/{courseId:guid}", (ICourseRepository repository, Guid courseId) =>
+        endpoints.MapGet(ENDPOINT+"/{courseId:guid}", (ICourseRepository repository, Guid courseId) =>
         {
-            var livro = repository.ReadById(courseId);
+            Course? livro = repository.ReadById(courseId);
 
             if (livro != null)
                 return Results.Ok(livro);
@@ -31,7 +31,7 @@ public static class CourseEndpoints
         })
             .WithOpenApi();
 
-        endpoints.MapPut("ENDPOINT/{courseId:guid}", (Course course, ICourseRepository repository, Guid courseId) =>
+        endpoints.MapPut(ENDPOINT+"/{courseId:guid}", (Course course, ICourseRepository repository, Guid courseId) =>
         {
             if (course is null)
                 return Results.BadRequest();
@@ -45,7 +45,7 @@ public static class CourseEndpoints
         })
             .WithOpenApi();
 
-        endpoints.MapDelete("ENDPOINT/{courseId:guid}", (ICourseRepository repository, Guid courseId) =>
+        endpoints.MapDelete(ENDPOINT+"/{courseId:guid}", (ICourseRepository repository, Guid courseId) =>
         {
             if (repository.Delete(courseId))
                 return Results.Ok();

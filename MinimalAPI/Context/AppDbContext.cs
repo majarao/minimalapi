@@ -3,8 +3,10 @@ using MinimalAPI.Configurations;
 
 namespace MinimalAPI.Context;
 
-public class AppDbContext(DbContextOptions options) : DbContext(options)
+public class AppDbContext : DbContext
 {
+    public AppDbContext(DbContextOptions options) : base(options) => Database.EnsureCreated();
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
